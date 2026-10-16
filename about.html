@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سایزیاب هوشمند کاپ و درباره ما | گل‌برگ</title>
+  <meta name="description" content="الگوریتم هوشمند محاسبه سایز سوتین، کاپ و شورت زنانه و آشنایی با استانداردهای بهداشتی فروشگاه گل‌برگ">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <canvas id="cgi-canvas"></canvas>
+
+  <div class="top-ticker">
+    <span>🌸 فروشگاه تخصصی لباس زیر «گل‌برگ» | ارسال ۱۰۰٪ محرمانه در بسته‌بندی بدون نام</span>
+    <span class="ticker-badge">کد تخفیف ۲۰٪: GOLBARG20</span>
+  </div>
+
+  <header class="header-wrap container">
+    <nav class="navbar glass-strong">
+      <a href="index.html" class="brand">
+        <span class="brand-orb">🌸</span>
+        <span>گل‌برگ</span>
+      </a>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html" class="nav-link">صفحه اصلی</a></li>
+        <li><a href="products.html" class="nav-link">فروشگاه لباس زیر</a></li>
+        <li><a href="about.html" class="nav-link active">سایزیاب هوشمند و درباره ما</a></li>
+        <li><a href="contact.html" class="nav-link">پیگیری محرمانه و تماس</a></li>
+      </ul>
+
+      <div class="nav-tools">
+        <a href="about.html" class="tool-btn" title="محاسبه‌گر هوشمند سایز سوتین">📏</a>
+        <button class="tool-btn" onclick="showToast('لیست علاقه‌مندی‌های شما ذخیره شده است 💖')" title="علاقه‌مندی‌ها">
+          ♥
+          <span class="counter-bubble" id="wish-badge">۰</span>
+        </button>
+        <button class="tool-btn" onclick="toggleCart(true)" title="سبد خرید">
+          🛍️
+          <span class="counter-bubble" id="cart-badge">۰</span>
+        </button>
+        <button class="tool-btn mobile-toggle" id="mobile-menu-btn" title="منو">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="page-banner glass">
+      <span class="pill-tag">📏 الگوریتم استاندارد بین‌المللی محاسبه سایز کاپ و بند</span>
+      <h1>محاسبه‌گر هوشمند سایز لباس زیر گل‌برگ</h1>
+      <p>با وارد کردن اندازه دور زیر سینه، دور روی سینه و دور باسن، الگوریتم ریاضی گل‌برگ سایز دقیق سوتین (عدد و کاپ) و سایز شورت شما را محاسبه می‌کند.</p>
+    </section>
+
+    <!-- الگوریتم سایزیاب سوتین و کاپ -->
+    <section class="ai-sizer-box glass">
+      <div>
+        <h3 class="studio-title">اندازه‌های خود را با متر خیاطی مشخص کنید:</h3>
+
+        <div class="range-group">
+          <div class="range-header">
+            <span>۱. دور زیر سینه (Underbust):</span>
+            <strong id="val-underbust" style="color:var(--pink-600);">۷۵ سانتی‌متر</strong>
+          </div>
+          <input type="range" id="inp-underbust" min="63" max="98" value="75" oninput="runBraSizeAlgorithm()">
+        </div>
+
+        <div class="range-group">
+          <div class="range-header">
+            <span>۲. دور برجستگی روی سینه (Bust):</span>
+            <strong id="val-overbust" style="color:var(--pink-600);">۹۰ سانتی‌متر</strong>
+          </div>
+          <input type="range" id="inp-overbust" min="74" max="118" value="90" oninput="runBraSizeAlgorithm()">
+        </div>
+
+        <div class="range-group">
+          <div class="range-header">
+            <span>۳. دور باسن (برای سایز شورت و بادی):</span>
+            <strong id="val-hip" style="color:var(--pink-600);">۹۶ سانتی‌متر</strong>
+          </div>
+          <input type="range" id="inp-hip" min="82" max="124" value="96" oninput="runBraSizeAlgorithm()">
+        </div>
+
+        <div class="range-group">
+          <label class="control-label">نوع قالب دلخواه شما:</label>
+          <div class="chip-group" id="bra-fit-group">
+            <button class="filter-chip active" onclick="setBraBandOffset(0, this)">فیت استاندارد</button>
+            <button class="filter-chip" onclick="setBraBandOffset(5, this)">کمی آزاد و راحت‌تر</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-result-panel">
+        <span class="pill-tag">نتیجه دقیق الگوریتم گل‌برگ</span>
+        <div>سایز سوتین و کاپ شما:</div>
+        <div class="size-giant-badge" id="ai-bra-output">75B</div>
+        <div class="panty-size-label" id="ai-panty-output">
+          سایز شورت و لباس خواب: M (مدیوم)
+        </div>
+        <div class="confidence-label" id="ai-bra-confidence">
+          اختلاف کاپ: ۱۵ سانتی‌متر | تطابق الگوریتم: ۹۹٪
+        </div>
+        <p class="advice-text" id="ai-bra-advice">
+          بر اساس استاندارد اروپایی، سایز 75 با کاپ B بهترین پشتیبانی و راحتی را بدون ایجاد فشار روی سرشانه برای شما فراهم می‌کند.
+        </p>
+        <a href="products.html" class="btn btn-pink">مشاهده ست‌های مناسب این سایز</a>
+      </div>
+    </section>
+
+    <!-- درباره استانداردهای گل‌برگ -->
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>🌿 چرا بانوان «گل‌برگ» را انتخاب می‌کنند؟</h2>
+          <p class="section-sub">تعهد ما به سلامت پوست، لطافت پارچه و حفظ کامل حریم خصوصی شما</p>
+        </div>
+      </div>
+
+      <div class="cats-grid">
+        <div class="glass cat-box">
+          <div class="cat-emoji">🔒</div>
+          <h3>بسته‌بندی ۱۰۰٪ محرمانه</h3>
+          <p>ارسال در کارتن سفید پلمپ‌شده بدون درج نام فروشگاه یا محتویات بسته روی مرسوله پستی.</p>
+        </div>
+        <div class="glass cat-box">
+          <div class="cat-emoji">🌿</div>
+          <h3>آستر نخ‌پنبه آنتی‌باکتریال</h3>
+          <p>تمامی شورت‌ها و ست‌های دانتل دارای لایه داخلی ۱۰۰٪ نخ‌پنبه ارگانیک ضدحساسیت هستند.</p>
+        </div>
+        <div class="glass cat-box">
+          <div class="cat-emoji">✨</div>
+          <h3>وکیوم بهداشتی استریل</h3>
+          <p>هر محصول پس از کنترل کیفی در پلمپ بهداشتی مجزا قرار گرفته و مستقیم ارسال می‌شود.</p>
+        </div>
+        <div class="glass cat-box">
+          <div class="cat-emoji">🎀</div>
+          <h3>دوخت و فنر طبی نرم</h3>
+          <p>استفاده از فنرهای منعطف طبی و دانتل‌های بدون خارش برای راحتی در طول تمام روز.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-cols">
+        <div>
+          <a href="index.html" class="brand" style="margin-bottom:10px;">
+            <span class="brand-orb">🌸</span>
+            <span>گل‌برگ</span>
+          </a>
+          <p class="footer-text">
+            فروشگاه اینترنتی تخصصی لباس زیر، لباس خواب و ست‌های دانتل زنانه با پالت سفید و صورتی و ارسال کاملاً محرمانه.
+          </p>
+        </div>
+        <div>
+          <h4 class="footer-title">دسترسی سریع</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">صفحه اصلی</a></li>
+            <li><a href="products.html">فروشگاه لباس زیر</a></li>
+            <li><a href="about.html">محاسبه‌گر سایز کاپ</a></li>
+            <li><a href="contact.html">پیگیری سفارش</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">دسته‌بندی‌ها</h4>
+          <ul class="footer-links">
+            <li><a href="products.html?cat=set">ست سوتین و شورت دانتل</a></li>
+            <li><a href="products.html?cat=bralette">برالت و نیم‌تنه</a></li>
+            <li><a href="products.html?cat=sleep">لباس خواب ساتن</a></li>
+            <li><a href="products.html?cat=brief">پک شورت نخی</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">باشگاه مشتریان گل‌برگ</h4>
+          <form onsubmit="event.preventDefault(); showToast('شماره شما در باشگاه مشتریان گل‌برگ ثبت شد 💖'); this.reset();" class="newsletter-form">
+            <input type="tel" class="glass-input" placeholder="شماره همراه..." required style="flex:1;">
+            <button type="submit" class="btn btn-pink" style="padding:10px 18px;">عضویت</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-copy">
+        تمامی حقوق برای <strong>فروشگاه لباس زیر گل‌برگ</strong> محفوظ است © ۱۴۰۵
+      </div>
+    </div>
+  </footer>
+
+  <!-- دراور سبد خرید -->
+  <div class="backdrop" id="cart-backdrop" onclick="toggleCart(false)"></div>
+  <aside class="cart-panel" id="cart-panel">
+    <div class="cart-head">
+      <h3>🛍️ سبد خرید محرمانه گل‌برگ</h3>
+      <button class="tool-btn sm-btn" onclick="toggleCart(false)">✕</button>
+    </div>
+
+    <div class="shipping-meter">
+      <div id="shipping-msg">تا ارسال رایگان پستی: ۱,۲۰۰,۰۰۰ تومان باقی مانده</div>
+      <div class="meter-track">
+        <div class="meter-fill" id="shipping-bar"></div>
+      </div>
+    </div>
+
+    <div class="cart-list" id="cart-list"></div>
+
+    <div class="cart-summary">
+      <div class="coupon-row">
+        <input type="text" id="coupon-inp" class="glass-input" placeholder="کد تخفیف (GOLBARG20)" style="flex:1;">
+        <button class="btn btn-outline" style="padding:8px 16px;" onclick="applyCoupon()">اعمال</button>
+      </div>
+      <div class="summary-line">
+        <span>تخفیف اعمال‌شده:</span>
+        <span id="cart-discount-val" class="discount-text">۰ تومان</span>
+      </div>
+      <div class="summary-total">
+        <span>مبلغ قابل پرداخت:</span>
+        <span id="cart-final-val" class="total-text">۰ تومان</span>
+      </div>
+      <button class="btn btn-pink full-width" onclick="checkoutCart()">ثبت سفارش در بسته‌بندی محرمانه</button>
+    </div>
+  </aside>
+
+  <div class="modal-wrap" id="quick-modal" onclick="if(event.target===this) closeModal()">
+    <div class="modal-card" id="quick-modal-body"></div>
+  </div>
+
+  <div class="toast-stack" id="toast-stack"></div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

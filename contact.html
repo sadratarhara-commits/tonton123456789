@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>پیگیری محرمانه سفارش و تماس | گل‌برگ</title>
+  <meta name="description" content="استعلام آنی وضعیت مرسوله پستی و ارتباط با مشاوران سایز فروشگاه لباس زیر گل‌برگ">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <canvas id="cgi-canvas"></canvas>
+
+  <div class="top-ticker">
+    <span>🌸 فروشگاه تخصصی لباس زیر «گل‌برگ» | ارسال ۱۰۰٪ محرمانه در بسته‌بندی بدون نام</span>
+    <span class="ticker-badge">کد تخفیف ۲۰٪: GOLBARG20</span>
+  </div>
+
+  <header class="header-wrap container">
+    <nav class="navbar glass-strong">
+      <a href="index.html" class="brand">
+        <span class="brand-orb">🌸</span>
+        <span>گل‌برگ</span>
+      </a>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html" class="nav-link">صفحه اصلی</a></li>
+        <li><a href="products.html" class="nav-link">فروشگاه لباس زیر</a></li>
+        <li><a href="about.html" class="nav-link">سایزیاب هوشمند و درباره ما</a></li>
+        <li><a href="contact.html" class="nav-link active">پیگیری محرمانه و تماس</a></li>
+      </ul>
+
+      <div class="nav-tools">
+        <a href="about.html" class="tool-btn" title="محاسبه‌گر هوشمند سایز سوتین">📏</a>
+        <button class="tool-btn" onclick="showToast('لیست علاقه‌مندی‌های شما ذخیره شده است 💖')" title="علاقه‌مندی‌ها">
+          ♥
+          <span class="counter-bubble" id="wish-badge">۰</span>
+        </button>
+        <button class="tool-btn" onclick="toggleCart(true)" title="سبد خرید">
+          🛍️
+          <span class="counter-bubble" id="cart-badge">۰</span>
+        </button>
+        <button class="tool-btn mobile-toggle" id="mobile-menu-btn" title="منو">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="page-banner glass">
+      <span class="pill-tag">🔒 تضمین حریم خصوصی و ارسال محرمانه</span>
+      <h1>پیگیری سفارش و پشتیبانی گل‌برگ</h1>
+      <p>وضعیت بسته‌بندی و ارسال سفارش خود را به صورت آنی استعلام کنید یا با کارشناسان بانوان در ارتباط باشید.</p>
+    </section>
+
+    <!-- الگوریتم رهگیری سفارش -->
+    <section class="glass tracker-card">
+      <h3 class="studio-title">📦 استعلام آنی کد رهگیری مرسوله</h3>
+      <p class="studio-desc">
+        کد رهگیری سفارش خود را وارد کنید (کد نمونه جهت تست: <strong>GOLBARG-1405</strong>):
+      </p>
+      <div class="tracker-row">
+        <input type="text" id="track-code-inp" class="glass-input" value="GOLBARG-1405" style="flex:1; min-width:220px;">
+        <button class="btn btn-pink" onclick="trackOrderAlgorithm()">بررسی وضعیت بسته</button>
+      </div>
+      <div id="track-result-box" class="tracker-result"></div>
+    </section>
+
+    <!-- فرم تماس و اطلاعات پشتیبانی -->
+    <section class="contact-layout">
+      <div class="glass contact-card">
+        <h3 class="studio-title">اطلاعات پشتیبانی گل‌برگ</h3>
+        <div class="contact-item">
+          <span class="contact-icon">🔒</span>
+          <div>
+            <strong>نحوه بسته‌بندی و ارسال:</strong>
+            <p>کارتن سفید پلمپ‌شده بدون درج نام فروشگاه یا نوع کالا روی برچسب پستی.</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">☎️</span>
+          <div>
+            <strong>تلفن مشاوره تخصصی بانوان:</strong>
+            <p dir="ltr">021 - 22 88 94 00</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">💬</span>
+          <div>
+            <strong>پشتیبانی تلگرام و واتساپ:</strong>
+            <p dir="ltr">0912 - 345 67 89</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">⏰</span>
+          <div>
+            <strong>ساعت پاسخگویی:</strong>
+            <p>همه‌روزه از ساعت ۱۰:۰۰ صبح الی ۲۲:۰۰ شب</p>
+          </div>
+        </div>
+      </div>
+
+      <form class="glass contact-card" onsubmit="event.preventDefault(); showToast('پیام شما با موفقیت برای کارشناسان گل‌برگ ارسال شد 🌸'); this.reset();">
+        <h3 class="studio-title">ارسال پیام به مشاوران سایز</h3>
+        <div class="form-field">
+          <label>نام شما</label>
+          <input type="text" class="glass-input full-input" placeholder="مثلاً: مریم رضایی" required>
+        </div>
+        <div class="form-field">
+          <label>شماره موبایل</label>
+          <input type="tel" class="glass-input full-input" placeholder="0912xxxxxxx" required>
+        </div>
+        <div class="form-field">
+          <label>موضوع درخواست</label>
+          <select class="glass-input full-input">
+            <option>مشاوره انتخاب سایز کاپ و سوتین</option>
+            <option>پیگیری ارسال محرمانه</option>
+            <option>پیشنهاد یا انتقاد</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>متن پیام شما</label>
+          <textarea rows="3" class="glass-input full-input" placeholder="سوال یا درخواست خود را بنویسید..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-pink full-width">ثبت و ارسال پیام ←</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-cols">
+        <div>
+          <a href="index.html" class="brand" style="margin-bottom:10px;">
+            <span class="brand-orb">🌸</span>
+            <span>گل‌برگ</span>
+          </a>
+          <p class="footer-text">
+            فروشگاه اینترنتی تخصصی لباس زیر، لباس خواب و ست‌های دانتل زنانه با پالت سفید و صورتی و ارسال کاملاً محرمانه.
+          </p>
+        </div>
+        <div>
+          <h4 class="footer-title">دسترسی سریع</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">صفحه اصلی</a></li>
+            <li><a href="products.html">فروشگاه لباس زیر</a></li>
+            <li><a href="about.html">محاسبه‌گر سایز کاپ</a></li>
+            <li><a href="contact.html">پیگیری سفارش</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">دسته‌بندی‌ها</h4>
+          <ul class="footer-links">
+            <li><a href="products.html?cat=set">ست سوتین و شورت دانتل</a></li>
+            <li><a href="products.html?cat=bralette">برالت و نیم‌تنه</a></li>
+            <li><a href="products.html?cat=sleep">لباس خواب ساتن</a></li>
+            <li><a href="products.html?cat=brief">پک شورت نخی</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">باشگاه مشتریان گل‌برگ</h4>
+          <form onsubmit="event.preventDefault(); showToast('شماره شما در باشگاه مشتریان گل‌برگ ثبت شد 💖'); this.reset();" class="newsletter-form">
+            <input type="tel" class="glass-input" placeholder="شماره همراه..." required style="flex:1;">
+            <button type="submit" class="btn btn-pink" style="padding:10px 18px;">عضویت</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-copy">
+        تمامی حقوق برای <strong>فروشگاه لباس زیر گل‌برگ</strong> محفوظ است © ۱۴۰۵
+      </div>
+    </div>
+  </footer>
+
+  <!-- دراور سبد خرید -->
+  <div class="backdrop" id="cart-backdrop" onclick="toggleCart(false)"></div>
+  <aside class="cart-panel" id="cart-panel">
+    <div class="cart-head">
+      <h3>🛍️ سبد خرید محرمانه گل‌برگ</h3>
+      <button class="tool-btn sm-btn" onclick="toggleCart(false)">✕</button>
+    </div>
+
+    <div class="shipping-meter">
+      <div id="shipping-msg">تا ارسال رایگان پستی: ۱,۲۰۰,۰۰۰ تومان باقی مانده</div>
+      <div class="meter-track">
+        <div class="meter-fill" id="shipping-bar"></div>
+      </div>
+    </div>
+
+    <div class="cart-list" id="cart-list"></div>
+
+    <div class="cart-summary">
+      <div class="coupon-row">
+        <input type="text" id="coupon-inp" class="glass-input" placeholder="کد تخفیف (GOLBARG20)" style="flex:1;">
+        <button class="btn btn-outline" style="padding:8px 16px;" onclick="applyCoupon()">اعمال</button>
+      </div>
+      <div class="summary-line">
+        <span>تخفیف اعمال‌شده:</span>
+        <span id="cart-discount-val" class="discount-text">۰ تومان</span>
+      </div>
+      <div class="summary-total">
+        <span>مبلغ قابل پرداخت:</span>
+        <span id="cart-final-val" class="total-text">۰ تومان</span>
+      </div>
+      <button class="btn btn-pink full-width" onclick="checkoutCart()">ثبت سفارش در بسته‌بندی محرمانه</button>
+    </div>
+  </aside>
+
+  <div class="modal-wrap" id="quick-modal" onclick="if(event.target===this) closeModal()">
+    <div class="modal-card" id="quick-modal-body"></div>
+  </div>
+
+  <div class="toast-stack" id="toast-stack"></div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

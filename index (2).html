@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>صفحه اصلی | فروشگاه تخصصی لباس زیر گل‌برگ</title>
+  <meta name="description" content="فروشگاه اینترنتی تخصصی لباس زیر زنانه گل‌برگ با طراحی سفید و صورتی، استودیو CGI و ارسال کاملاً محرمانه">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- بوم گرافیکی CGI (ذرات گلبرگ و موج ابریشم) -->
+  <canvas id="cgi-canvas"></canvas>
+
+  <!-- نوار اعلان بالا -->
+  <div class="top-ticker">
+    <span>🌸 فروشگاه تخصصی لباس زیر «گل‌برگ» | ارسال ۱۰۰٪ محرمانه در بسته‌بندی بدون نام</span>
+    <span class="ticker-badge">کد تخفیف ۲۰٪: GOLBARG20</span>
+  </div>
+
+  <!-- هدر شیشه‌ای -->
+  <header class="header-wrap container">
+    <nav class="navbar glass-strong">
+      <a href="index.html" class="brand">
+        <span class="brand-orb">🌸</span>
+        <span>گل‌برگ</span>
+      </a>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html" class="nav-link active">صفحه اصلی</a></li>
+        <li><a href="products.html" class="nav-link">فروشگاه لباس زیر</a></li>
+        <li><a href="about.html" class="nav-link">سایزیاب هوشمند و درباره ما</a></li>
+        <li><a href="contact.html" class="nav-link">پیگیری محرمانه و تماس</a></li>
+      </ul>
+
+      <div class="nav-tools">
+        <a href="about.html" class="tool-btn" title="محاسبه‌گر هوشمند سایز سوتین">📏</a>
+        <button class="tool-btn" onclick="showToast('لیست علاقه‌مندی‌های شما ذخیره شده است 💖')" title="علاقه‌مندی‌ها">
+          ♥
+          <span class="counter-bubble" id="wish-badge">۰</span>
+        </button>
+        <button class="tool-btn" onclick="toggleCart(true)" title="سبد خرید">
+          🛍️
+          <span class="counter-bubble" id="cart-badge">۰</span>
+        </button>
+        <button class="tool-btn mobile-toggle" id="mobile-menu-btn" title="منو">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- بخش هیرو -->
+    <section class="hero-wrap">
+      <div>
+        <span class="pill-tag">✨ لطافت ابریشم و دانتل فرانسوی در پالت سفید و صورتی</span>
+        <h1 class="hero-heading">
+          فروشگاه تخصصی لباس زیر <br>
+          <span class="gradient-text">«گل‌برگ»؛ ظرافت و راحتی محض</span>
+        </h1>
+        <p class="hero-lead">
+          تمامی محصولات گل‌برگ از الیاف ضدحساسیت، نخ‌پنبه ارگانیک، ساتن ابریشم و دانتل‌های لطیف تهیه شده‌اند. با الگوریتم هوشمند ما، سایز دقیق کاپ و بند خود را محاسبه کنید و سفارش خود را در بسته‌بندی کاملاً محرمانه تحویل بگیرید.
+        </p>
+        <div class="hero-cta-row">
+          <a href="products.html" class="btn btn-pink">مشاهده ویترین لباس‌ها ←</a>
+          <a href="about.html" class="btn btn-outline">محاسبه آنلاین سایز کاپ 📐</a>
+        </div>
+
+        <div class="metrics-bar glass">
+          <div class="metric-box">
+            <strong>۱۰۰٪</strong>
+            <span>بسته‌بندی محرمانه</span>
+          </div>
+          <div class="metric-box">
+            <strong>ضد حساسیت</strong>
+            <span>الیاف نخی و ابریشمی</span>
+          </div>
+          <div class="metric-box">
+            <strong>۹۹.۲٪</strong>
+            <span>دقت الگوریتم سایز کاپ</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ویترین استودیویی فقط لباس (بدون مدل انسانی) -->
+      <div class="hero-stage">
+        <div class="hero-frame tilt-card" data-tilt>
+          <div class="tilt-glare"></div>
+          <div id="hero-svg-holder" class="hero-svg-box"></div>
+        </div>
+        <div class="float-chip chip-1 glass-strong">
+          <span style="font-size:1.5rem;">🎀</span>
+          <div>
+            <div>دانتل و ساتن ابریشم</div>
+            <small style="color:var(--pink-600);">نمایش استودیویی فقط لباس</small>
+          </div>
+        </div>
+        <div class="float-chip chip-2 glass-strong">
+          <span style="font-size:1.5rem;">🔒</span>
+          <div>
+            <div>ارسال کاملاً محرمانه</div>
+            <small style="color:var(--pink-600);">بدون درج عنوان روی بسته</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- دسته‌بندی‌های تخصصی -->
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>🌸 دسته‌بندی‌های تخصصی گل‌برگ</h2>
+          <p class="section-sub">تمامی تصاویر به صورت کاتالوگ استودیویی از خود لباس روی چوب‌لباسی هستند</p>
+        </div>
+        <a href="products.html" class="btn btn-outline">همه دسته‌بندی‌ها</a>
+      </div>
+
+      <div class="cats-grid">
+        <a href="products.html?cat=set" class="glass cat-box tilt-card" data-tilt>
+          <div class="tilt-glare"></div>
+          <div class="cat-emoji">👙</div>
+          <h3>ست سوتین و شورت</h3>
+          <p>دانتل، گیپور و فنردار طبی</p>
+        </a>
+        <a href="products.html?cat=bralette" class="glass cat-box tilt-card" data-tilt>
+          <div class="tilt-glare"></div>
+          <div class="cat-emoji">🌸</div>
+          <h3>برالت و نیم‌تنه</h3>
+          <p>راحتی، اسپرت و بدون فنر</p>
+        </a>
+        <a href="products.html?cat=sleep" class="glass cat-box tilt-card" data-tilt>
+          <div class="tilt-glare"></div>
+          <div class="cat-emoji">👘</div>
+          <h3>لباس خواب و رب‌دوشامبر</h3>
+          <p>ساتن ابریشم و حریر لطیف</p>
+        </a>
+        <a href="products.html?cat=brief" class="glass cat-box tilt-card" data-tilt>
+          <div class="tilt-glare"></div>
+          <div class="cat-emoji">🎀</div>
+          <h3>پک شورت نخی و بادی</h3>
+          <p>نخ‌پنبه ارگانیک ضدحساسیت</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- استودیو CGI طراحی ست لباس زیر روی چوب‌لباسی -->
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>🎨 استودیو CGI شخصی‌سازی ست لباس زیر</h2>
+          <p class="section-sub">رنگ پارچه و بافت دانتل را تغییر دهید؛ لباس روی چوب‌لباسی رزگلد به صورت زنده رندر می‌شود</p>
+        </div>
+      </div>
+
+      <div class="cgi-studio-card glass">
+        <div class="hanger-stage">
+          <span class="pill-tag" id="cgi-preview-badge">طیف: صورتی گل‌برگ | بافت: ساتن ابریشم</span>
+
+          <!-- رندر برداری فقط ست لباس زیر روی چوب‌لباسی رزگلد (بدون بدن/انسان) -->
+          <svg class="garment-studio-svg" viewBox="0 0 300 330" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="cgiBraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" id="bra-stop-1" stop-color="#ffd1e8" />
+                <stop offset="55%" id="bra-stop-2" stop-color="#f472b6" />
+                <stop offset="100%" id="bra-stop-3" stop-color="#be185d" />
+              </linearGradient>
+              <linearGradient id="cgiSheen" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="rgba(255,255,255,0)" />
+                <stop offset="50%" id="cgi-sheen-stop" stop-color="rgba(255,255,255,0.65)" />
+                <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+              </linearGradient>
+              <linearGradient id="roseGoldHanger" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#e6a89a" />
+                <stop offset="50%" stop-color="#fff0ec" />
+                <stop offset="100%" stop-color="#c87d6c" />
+              </linearGradient>
+            </defs>
+
+            <!-- چوب‌لباسی لوکس رزگلد -->
+            <path d="M150 16 C168 16 168 38 150 44 L150 56" fill="none" stroke="url(#roseGoldHanger)" stroke-width="5" stroke-linecap="round"/>
+            <path d="M45 84 L150 54 L255 84" fill="none" stroke="url(#roseGoldHanger)" stroke-width="6" stroke-linecap="round"/>
+            <line x1="55" y1="84" x2="245" y2="84" stroke="url(#roseGoldHanger)" stroke-width="3" stroke-dasharray="4 2"/>
+            <rect x="78" y="78" width="10" height="16" rx="3" fill="#d48c7c"/>
+            <rect x="212" y="78" width="10" height="16" rx="3" fill="#d48c7c"/>
+
+            <!-- بندهای سرشانه سوتین -->
+            <path d="M83 92 L83 135 M217 92 L217 135" stroke="url(#cgiBraGrad)" stroke-width="5" stroke-linecap="round"/>
+
+            <!-- کاپ چپ و راست سوتین -->
+            <path d="M68 135 Q85 95 144 162 Q105 190 68 166 Z" fill="url(#cgiBraGrad)" stroke="#ffffff" stroke-width="2"/>
+            <path d="M232 135 Q215 95 156 162 Q195 190 232 166 Z" fill="url(#cgiBraGrad)" stroke="#ffffff" stroke-width="2"/>
+
+            <!-- لایه شیدر براقیت روی کاپ‌ها -->
+            <path d="M72 138 Q88 104 140 160 Q105 184 72 164 Z" fill="url(#cgiSheen)"/>
+            <path d="M228 138 Q212 104 160 160 Q195 184 228 164 Z" fill="url(#cgiSheen)"/>
+
+            <!-- حاشیه دانتل گل‌دار -->
+            <path d="M83 122 Q98 132 115 144 T144 162 M217 122 Q202 132 185 144 T156 162" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-dasharray="5 4"/>
+
+            <!-- بند زیر سینه و پاپیون وسط -->
+            <rect x="68" y="164" width="164" height="12" rx="6" fill="url(#cgiBraGrad)" stroke="#ffffff" stroke-width="1.5"/>
+            <circle cx="150" cy="166" r="6" fill="#ffffff"/>
+            <path d="M140 162 L150 166 L140 172 Z M160 162 L150 166 L160 172 Z" fill="#ffffff"/>
+
+            <!-- شورت ست آویزان در بخش پایین -->
+            <path d="M84 218 Q150 228 216 218 L206 252 Q168 268 158 304 L142 304 Q132 268 94 252 Z" fill="url(#cgiBraGrad)" stroke="#ffffff" stroke-width="2"/>
+            <path d="M88 222 Q150 230 212 222 L202 250 Q166 266 156 300 L144 300 Q134 266 98 250 Z" fill="url(#cgiSheen)"/>
+            <path d="M94 252 Q128 268 142 302 M206 252 Q172 268 158 302" fill="none" stroke="#ffffff" stroke-width="3" stroke-dasharray="4 4"/>
+            <circle cx="150" cy="226" r="5" fill="#ffffff"/>
+          </svg>
+
+          <div class="live-price-tag" id="cgi-live-price">قیمت ست سفارشی: ۶۸۰,۰۰۰ تومان</div>
+        </div>
+
+        <div>
+          <h3 class="studio-title">طراحی ست اختصاصی گل‌برگ</h3>
+          <p class="studio-desc">
+            رنگ و جنسیت پارچه ست لباس زیر را انتخاب کنید؛ شیدر نوری و قیمت متریال به صورت لحظه‌ای محاسبه می‌شود:
+          </p>
+
+          <label class="control-label">۱. انتخاب طیف رنگی پارچه:</label>
+          <div class="swatch-row" id="cgi-swatches">
+            <button class="color-swatch active" style="background:#f472b6;" onclick="updateCGISet('#ffd1e8','#f472b6','#be185d','صورتی گل‌برگ', this)"></button>
+            <button class="color-swatch" style="background:#ffffff;" onclick="updateCGISet('#ffffff','#fdf2f8','#f9a8d4','سفید صدفی عروس', this)"></button>
+            <button class="color-swatch" style="background:#ec4899;" onclick="updateCGISet('#fbcfe8','#ec4899','#9d174d','سرخابی یاقوتی', this)"></button>
+            <button class="color-swatch" style="background:#fda4af;" onclick="updateCGISet('#ffe4e6','#fda4af','#e11d48','گلبهی هلویی', this)"></button>
+            <button class="color-swatch" style="background:#d8b4fe;" onclick="updateCGISet('#f3e8ff','#c084fc','#7e22ce','یاسی پاستلی', this)"></button>
+          </div>
+
+          <label class="control-label">۲. انتخاب نوع پارچه و دانتل:</label>
+          <div class="fabric-pills" id="cgi-fabrics">
+            <button class="fabric-btn active" onclick="updateCGIFabric('ساتن ابریشم', 0.65, 680000, this)">✨ ساتن ابریشم (براق و لطیف)</button>
+            <button class="fabric-btn" onclick="updateCGIFabric('دانتل فرانسوی', 0.40, 790000, this)">🌸 دانتل گل‌دار فرانسوی</button>
+            <button class="fabric-btn" onclick="updateCGIFabric('نخ‌پنبه ارگانیک', 0.15, 520000, this)">🌿 نخ‌پنبه ارگانیک (ضدحساسیت)</button>
+            <button class="fabric-btn" onclick="updateCGIFabric('حریر و گیپور عروس', 0.80, 890000, this)">💎 حریر و گیپور برجسته</button>
+          </div>
+
+          <button class="btn btn-pink full-width" onclick="addCustomSetToCart()">
+            + افزودن این ست سفارشی به سبد خرید
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- محصولات منتخب -->
+    <section>
+      <div class="section-head">
+        <div>
+          <h2>🌟 پرفروش‌ترین‌های گل‌برگ</h2>
+          <p class="section-sub">موس را روی کارت‌ها حرکت دهید تا افکت سه‌بعدی و درخشش پارچه را ببینید</p>
+        </div>
+        <a href="products.html" class="btn btn-outline">مشاهده همه محصولات ←</a>
+      </div>
+
+      <div class="products-grid" id="home-featured-grid"></div>
+    </section>
+  </main>
+
+  <!-- فوتر -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-cols">
+        <div>
+          <a href="index.html" class="brand" style="margin-bottom:10px;">
+            <span class="brand-orb">🌸</span>
+            <span>گل‌برگ</span>
+          </a>
+          <p class="footer-text">
+            فروشگاه اینترنتی تخصصی لباس زیر، لباس خواب و ست‌های دانتل زنانه با پالت سفید و صورتی و ارسال کاملاً محرمانه.
+          </p>
+        </div>
+        <div>
+          <h4 class="footer-title">دسترسی سریع</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">صفحه اصلی</a></li>
+            <li><a href="products.html">فروشگاه لباس زیر</a></li>
+            <li><a href="about.html">محاسبه‌گر سایز کاپ</a></li>
+            <li><a href="contact.html">پیگیری سفارش</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">دسته‌بندی‌ها</h4>
+          <ul class="footer-links">
+            <li><a href="products.html?cat=set">ست سوتین و شورت دانتل</a></li>
+            <li><a href="products.html?cat=bralette">برالت و نیم‌تنه</a></li>
+            <li><a href="products.html?cat=sleep">لباس خواب ساتن</a></li>
+            <li><a href="products.html?cat=brief">پک شورت نخی</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">باشگاه مشتریان گل‌برگ</h4>
+          <form onsubmit="event.preventDefault(); showToast('شماره شما در باشگاه مشتریان گل‌برگ ثبت شد 💖'); this.reset();" class="newsletter-form">
+            <input type="tel" class="glass-input" placeholder="شماره همراه..." required style="flex:1;">
+            <button type="submit" class="btn btn-pink" style="padding:10px 18px;">عضویت</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-copy">
+        تمامی حقوق برای <strong>فروشگاه لباس زیر گل‌برگ</strong> محفوظ است © ۱۴۰۵
+      </div>
+    </div>
+  </footer>
+
+  <!-- دراور سبد خرید هوشمند -->
+  <div class="backdrop" id="cart-backdrop" onclick="toggleCart(false)"></div>
+  <aside class="cart-panel" id="cart-panel">
+    <div class="cart-head">
+      <h3>🛍️ سبد خرید محرمانه گل‌برگ</h3>
+      <button class="tool-btn sm-btn" onclick="toggleCart(false)">✕</button>
+    </div>
+
+    <div class="shipping-meter">
+      <div id="shipping-msg">تا ارسال رایگان پستی: ۱,۲۰۰,۰۰۰ تومان باقی مانده</div>
+      <div class="meter-track">
+        <div class="meter-fill" id="shipping-bar"></div>
+      </div>
+    </div>
+
+    <div class="cart-list" id="cart-list"></div>
+
+    <div class="cart-summary">
+      <div class="coupon-row">
+        <input type="text" id="coupon-inp" class="glass-input" placeholder="کد تخفیف (GOLBARG20)" style="flex:1;">
+        <button class="btn btn-outline" style="padding:8px 16px;" onclick="applyCoupon()">اعمال</button>
+      </div>
+      <div class="summary-line">
+        <span>تخفیف اعمال‌شده:</span>
+        <span id="cart-discount-val" class="discount-text">۰ تومان</span>
+      </div>
+      <div class="summary-total">
+        <span>مبلغ قابل پرداخت:</span>
+        <span id="cart-final-val" class="total-text">۰ تومان</span>
+      </div>
+      <button class="btn btn-pink full-width" onclick="checkoutCart()">ثبت سفارش در بسته‌بندی محرمانه</button>
+    </div>
+  </aside>
+
+  <!-- مودال نمایش سریع -->
+  <div class="modal-wrap" id="quick-modal" onclick="if(event.target===this) closeModal()">
+    <div class="modal-card" id="quick-modal-body"></div>
+  </div>
+
+  <div class="toast-stack" id="toast-stack"></div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
